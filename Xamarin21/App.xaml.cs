@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin21.Models;
+using Xamarin21.Pages;
 
 namespace Xamarin21
 {
@@ -9,8 +11,7 @@ namespace Xamarin21
         public App()
         {
             InitializeComponent();
-
-            MainPage = new SetPinPage();    //MainPage();
+            MainPage = new NavigationPage(new SetPinPage());
         }
 
         protected override void OnStart()

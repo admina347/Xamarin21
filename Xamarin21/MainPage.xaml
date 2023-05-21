@@ -19,6 +19,7 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
+        <Button Text="Выход" Clicked="LogoutButton_Clicked" Grid.Column="3" HorizontalOptions="FillAndExpand"></Button>
     </StackLayout>
 
 </ContentPage>
