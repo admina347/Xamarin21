@@ -10,7 +10,7 @@ namespace Xamarin21
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new SetPinPage();    //MainPage();
         }
 
         protected override void OnStart()
