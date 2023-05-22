@@ -24,7 +24,7 @@ namespace Xamarin21.Pages
 
             if (secretPin == text)
             {
-                await Navigation.PushModalAsync(new MainPage());
+                await Navigation.PushModalAsync(new ImagesPage());
             }
             else
             {

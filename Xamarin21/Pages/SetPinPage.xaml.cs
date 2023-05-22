@@ -49,7 +49,7 @@ namespace Xamarin21.Pages
             {
                 // Сохраним значения пин.
                 Preferences.Set("userPin", text);
-                await Navigation.PushModalAsync(new MainPage());
+                await Navigation.PushModalAsync(new ImagesPage());
             }
             else
             {
