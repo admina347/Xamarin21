@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,7 +50,7 @@ namespace Xamarin21.Pages
             {
                 // Сохраним значения пин.
                 Preferences.Set("userPin", text);
-                await Navigation.PushModalAsync(new ImagesPage());
+                await Navigation.PushModalAsync(new ImageListPage());
             }
             else
             {
