@@ -45,7 +45,7 @@ namespace Xamarin21.Pages
             Image image = new Image
             {
                 Source = ImageSource.FromFile(filename),   //FromUri(new Uri(filepath))
-                
+                Aspect = Aspect.AspectFill
 
             };
             
