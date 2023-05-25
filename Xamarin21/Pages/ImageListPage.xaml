@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="Xamarin21.Pages.ImageListPage">
-
     <StackLayout>
         <Label Text="Изображения камеры" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
         <ListView x:Name="imageList"
-       HasUnevenRows="True"
-       ItemsSource="{Binding Images}"
-       ItemSelected="imageList_ItemSelected">
+             HasUnevenRows="True"
+             ItemsSource="{Binding Images}"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="imageList_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell
@@ -21,6 +21,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button BackgroundColor ="AliceBlue"  x:Name="addButton" Text="Добавить" StyleClass="btn-add"></Button>
+        <StackLayout Orientation="Horizontal" Padding="30,10,30,15" HorizontalOptions="StartAndExpand" >
+            <Button Clicked="OpenImage" Text="Открыть" />
+            <Button Clicked="DeleteImage" Text="Удалить" />
+        </StackLayout>
     </StackLayout>
+
 </ContentPage>
