@@ -24,7 +24,7 @@ namespace Xamarin21
             Preferences.Clear();
 
             // Возврат на предыдущую страницу
-            await Navigation.PushModalAsync(new SetPinPage());
+            await Navigation.PushModalAsync(new LoginPage());
         }
     }
 }

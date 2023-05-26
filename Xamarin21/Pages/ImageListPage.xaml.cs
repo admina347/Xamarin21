@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 using Xamarin.Forms.Xaml;
@@ -19,67 +19,42 @@ namespace Xamarin21.Pages
     {
         GalleryImage SelectedImage;
         public ObservableCollection<GalleryImage> Images { get; set; } = new ObservableCollection<GalleryImage>();
+
         public ImageListPage()
         {
             InitializeComponent();
-
 
             string imagesPath = "/storage/emulated/0/DCIM/Camera";
 
             try
             {
                 IEnumerable<string> allImages = Directory.EnumerateFiles(imagesPath);
-                //DisplayAlert("Строк" + gridRows, "Найдено файлов" + allImages.Count(), "OK");
                 foreach (string filename in allImages)
                 {
-                    //Create an Image object for each bitmap
-                    //DisplayAlert("File", filename, "OK");
+
                     string imageName = System.IO.Path.GetFileName(filename);
                     string imageDescription = File.GetCreationTimeUtc(filename).ToString("yyyy:MM:dd HH:mm:ss");
-                    //DateTime imageDate = GetMyImageTakenDate(filename);
-                    //Image image = new Image
-                    //{
-                    //    Source = ImageSource.FromFile(filename),   //FromUri(new Uri(filepath))
-                    //    HeightRequest = 100
 
-                    //};
-                    //
                     Images.Add(new GalleryImage(Guid.NewGuid(), imageName, image: filename, description: imageDescription));
-
-
-
                 }
-
+                //Empty Folder
+                if (Images.Count <= 0)
+                {
+                    errorLabel.Text = "В папке нет изображений";
+                }
+                else
+                {
+                    errorLabel.IsVisible = false;
+                }
             }
             catch (Exception ex)
             {
-
+                imageListCaption.Text = "Ошибка";
+                errorLabel.Text = ex.Message;
             }
             BindingContext = this;
         }
 
-        //static DateTime GetMyImageTakenDate(string filename)
-        //{
-        //    DateTime takenDate = DateTime.Today;
-
-        //    CGImageSource myImageSource;
-        //    myImageSource = CGImageSource.FromUrl(filename, null);
-        //    var ns = new NSDictionary();
-        //    var imageProperties = myImageSource.CopyProperties(ns, 0);
-
-        //    NSObject date = null;
-        //    var exifDictionary = imageProperties.ValueForKey(ImageIO.CGImageProperties.ExifDictionary);
-        //    if (exifDictionary != null)
-        //    {
-        //        date = exifDictionary.ValueForKey(ImageIO.CGImageProperties.ExifDateTimeOriginal);
-        //    }
-        //    takenDate = date != null ? DateTime.ParseExact(date.ToString(), "yyyy:MM:dd HH:mm:ss", null) : takenDate;
-        //    return takenDate;
-        //}
-
-        /// <summary>
-        /// Обработчик нажатия
-        /// </summary>
         private void imageList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             // распаковка модели из объекта
@@ -122,13 +97,27 @@ namespace Xamarin21.Pages
             var imageToRemove = imageList.SelectedItem as GalleryImage;
             if (imageToRemove != null)
             {
-                // Удаляем
-                Images.Remove(imageToRemove);
-                //
-                File.Delete(imageToRemove.Image);
                 // Уведомляем пользователя
-                await DisplayAlert(imageToRemove.Name, $"Изображение '{imageToRemove.Image}' удалено", "ОК");
+                bool deleteResult = await DisplayAlert("Удалить", $"Вы уверены, что хотите удалить {imageToRemove.Name}?", "No", "Yes");
+
+                if (!deleteResult)
+                {
+                    // Удаляем
+                    Images.Remove(imageToRemove);
+                    File.Delete(imageToRemove.Image);
+                    // Уведомляем пользователя
+                    await DisplayAlert(imageToRemove.Name, $"Изображение '{imageToRemove.Image}' удалено", "ОК");
+                }
             }
+        }
+
+        //Logout
+        private async void LogoutButton_Clicked(object sender, System.EventArgs e)
+        {
+            //Delete Pin
+            Preferences.Clear();
+            // Возврат на предыдущую страницу
+            await Navigation.PushModalAsync(new LoginPage());
         }
     }
 }

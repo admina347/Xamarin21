@@ -4,11 +4,11 @@
              x:Class="Xamarin21.Pages.LoginPage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Введите пин"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Entry x:Name="userPin" Keyboard="Numeric" VerticalOptions="Start" IsPassword="true" MaxLength="4" Completed="Login"/>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <Label x:Name="pinText" Text="Введите пин" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="loginPin" Keyboard="Numeric" Margin="5, 10" HorizontalTextAlignment="Center" IsPassword="true" MaxLength="4" Completed="Login"/>
+            <Entry x:Name="firstPin" Keyboard="Numeric" VerticalOptions="Start" IsPassword="true" MaxLength="4" Completed="GoToSecondPin" IsVisible="false"/>
+            <Entry x:Name="secondPin" Keyboard="Numeric" VerticalOptions="Start" IsPassword="true" MaxLength="4" Completed="SavePin" IsVisible="false"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

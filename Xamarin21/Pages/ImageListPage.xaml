@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Xamarin21.Pages"
             x:Class="Xamarin21.Pages.ImageListPage">
     <StackLayout>
-        <Label Text="Изображения камеры" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
+        <Label x:Name="imageListCaption" Text="Изображения камеры" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
+        <Label x:Name="errorLabel" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
         <ListView x:Name="imageList"
              HasUnevenRows="True"
              ItemsSource="{Binding Images}"
@@ -22,9 +24,10 @@
             </ListView.ItemTemplate>
         </ListView>
         
-        <StackLayout Orientation="Horizontal" Padding="30,10,30,15" HorizontalOptions="StartAndExpand" >
+        <StackLayout Orientation="Horizontal" Padding="30,10,30,15" HorizontalOptions="Center" >
             <Button Clicked="OpenImage" Text="Открыть" />
             <Button Clicked="DeleteImage" Text="Удалить" />
+            <Button Text="Выход" Clicked="LogoutButton_Clicked" Grid.Column="3" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>
     </StackLayout>
 

@@ -11,7 +11,7 @@ namespace Xamarin21
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new SetPinPage());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
